@@ -1,0 +1,673 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Project 2 Write up</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a1090e9c-7085-46de-ab9f-1cff353a559d" class="page sans"><header><h1 class="page-title">Project 2 Write up</h1></header><div class="page-body"><p id="c913a19f-ad4b-49f0-a0a6-88dfb504a8d4" class="">Eduard Miryozan, Johannes Fung</p><h1 id="98cf8027-9314-4a9d-88de-3a81b8ba4e48" class="">Overview</h1><p id="938eb642-8ea4-460a-a31d-d65add0b728c" class="">This assignment was divided into two sections. The first section consisted of working de Casteljau’s algorithm to create easily malleable curves in a 2D and 3D space. This process involved using the idea of linear interpolation between points in order to generate the next proper point on the final curve. The second section worked heavily with rendering and manipulating 3D meshes. This section began with the calculation of polygon normals in order to generate a phong shading scheme, and later ended with the ability to edit our 3D meshes. The editing operations we implemented were edge flipping, splitting and mesh upsampling.</p><h1 id="979a9f15-8fcd-400b-846e-40baf3298a03" class="">Part 1  -  <strong><strong>Bezier Curves with 1D de Casteljau Subdivision</strong></strong></h1><p id="e62d1cc7-30e7-467f-a313-bd678b87b32b" class="">The de Casteljau algorithm estimates a Bezier curve by calculating a linear interpolation (lerp) between consecutive pairs of points in a given set. This step is repeated recursively until there is only one point left in the set. This point corresponds to the location of the curve at time <em><em>t.</em></em></p><div id="15e4a15d-c4b7-4a5d-ae0d-7c3daba338ce" class="column-list"><div id="d9df4389-3127-47c2-b4a8-0bf78370835a" style="width:50%" class="column"><figure id="1c97366a-ad7b-4fbb-94d5-042f6d79f20c" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled.png"><img style="width:958px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled.png"/></a><figcaption>6 Point Bezier Curve at Step 0</figcaption></figure></div><div id="bf1bc1c1-159b-4c9a-ad4a-f5fc1aa2693e" style="width:50%" class="column"><figure id="1fbe1048-7a62-41da-86b6-bfe73ce5725a" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%201.png"><img style="width:951px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%201.png"/></a><figcaption>6 Point Bezier Curve at Step 1</figcaption></figure></div></div><div id="df92b7e4-7fc7-42d2-8d19-d15cb5b36d4d" class="column-list"><div id="b2ca3e03-ea36-4d86-a0c4-9e3b3187b3e5" style="width:50%" class="column"><figure id="98a7985c-4b5a-4668-95e5-4b92ec00a2a4" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%202.png"><img style="width:953px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%202.png"/></a><figcaption>6 Point Bezier Curve at Step 2</figcaption></figure></div><div id="dcc8efe1-19c0-46eb-a593-15990324f3ab" style="width:50%" class="column"><figure id="d714dd4a-dbd2-40ca-bf56-b9849dee0c83" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%203.png"><img style="width:952px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%203.png"/></a><figcaption>6 Point Bezier Curve at Step 3</figcaption></figure></div></div><div id="c713d983-b1d0-42dc-b58c-bb3c783fd4f1" class="column-list"><div id="f07f18dc-ce54-4e17-b941-7f516092e00b" style="width:50%" class="column"><figure id="7c5ce35b-9816-4989-a184-e01633738334" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%204.png"><img style="width:958px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%204.png"/></a><figcaption>6 Point Bezier Curve at Step 4</figcaption></figure></div><div id="8a2e49b6-57d5-4254-96f1-e3a8d627a2a2" style="width:50%" class="column"><figure id="0dd43300-a725-43f3-8df0-9a0f70b198d0" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%205.png"><img style="width:955px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%205.png"/></a><figcaption>6 Point Bezier Curve at Step 5 (final)</figcaption></figure></div></div><div id="a8d8c28e-ba93-48d9-93c4-0cf5e5810d5b" class="column-list"><div id="e3bd91ea-9f29-4a86-b489-b495ccc45027" style="width:50%" class="column"><figure id="ff969370-0f9c-4842-b032-888d5a525509" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%206.png"><img style="width:964px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%206.png"/></a><figcaption>6 Point Bezier Curve Adjusted</figcaption></figure></div><div id="69e2d880-a7ee-4b21-96ed-58fa72df33f4" style="width:50%" class="column"><figure id="b8cefbb5-a15d-4034-ae05-ac44f6154027" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%207.png"><img style="width:955px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%207.png"/></a><figcaption>6 Point Bezier Curve Adjusted, t &lt; 0.5</figcaption></figure><p id="f69e00c3-4504-433e-8314-85dff8c34a4b" class="">
+</p></div></div><figure id="c11416c1-4293-4ae6-ad75-6dd910ca25e3" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%208.png"><img style="width:955px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%208.png"/></a><figcaption>6 Point Bezier Curve Adjusted, t &gt; 0.5</figcaption></figure><h1 id="500cc8ef-c812-4c8c-8343-6e84c06324fe" class="">Part 2  -  <strong><strong>Bezier Surfaces with Separable 1D de Casteljau</strong></strong></h1><p id="061ddecf-8f2e-4f74-9ceb-6e4bcc9f3232" class="">The de Casteljau algorithm can extend to Bezier surfaces by simply lerping with 3D point instead of 2D. We simply incorporated linearly interpolating the z coordinating as well in the calculations and were left with a 3D Bezier patch. The rest of algorithm was the same as in Part 1.</p><figure id="9d2fbc0e-3b25-487c-8b3f-6fd1e010c30c" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%209.png"><img style="width:954px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%209.png"/></a><figcaption>Mesh Teapot created with Bezier Patches</figcaption></figure><h1 id="1d26b292-2f8a-40e7-85e9-daa2829b9820" class="">Part 3  -  Area Weighted Normal Vertex</h1><p id="df0ce281-475e-4791-828b-ec70b29fce57" class="">We implemented <strong>area-weighted vertex normals</strong> by doing the following:</p><ol type="1" id="5bd83ce6-19c3-41ae-ab99-4663e93ac335" class="numbered-list" start="1"><li>Given a vertex V’s half edge, iterate over each of its neighboring polygons<ol type="a" id="e58eaba9-d460-4072-afdc-63805ab1716a" class="numbered-list" start="1"><li>Calculate the area of the polygon</li></ol><ol type="a" id="8ab8fa26-ade9-4468-8f33-7d04653f6634" class="numbered-list" start="2"><li>Get the normal of the polygon</li></ol><ol type="a" id="0abffefe-0bad-4421-a7b1-4f43747a7f8c" class="numbered-list" start="3"><li>Multiply the normal by the area</li></ol><ol type="a" id="68e1472f-ece8-4355-a8a5-0ca70d65223d" class="numbered-list" start="4"><li>Add the weighted normal to V’s normal</li></ol></li></ol><ol type="1" id="5dec03d4-d962-4899-843b-07c67462f944" class="numbered-list" start="2"><li>Normalize V’s normal</li></ol><ol type="1" id="140caec0-d5a7-47d5-b7d4-f04ed56d4400" class="numbered-list" start="3"><li>Return V’s normal</li></ol><div id="569eba48-bddb-4492-8af2-efd6d650834f" class="column-list"><div id="cd12a20d-f513-441f-a65f-f61a1dfc5764" style="width:50%" class="column"><figure id="88ce9a92-1763-4f04-b033-52046bfae645" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2010.png"><img style="width:953px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2010.png"/></a><figcaption>Mesh Teapot with Wireframe and Default Flat Shading </figcaption></figure></div><div id="2cbcdf0e-ba07-406f-8aea-6349b1ef943a" style="width:50%" class="column"><figure id="f94e4c44-a1b8-4301-9106-76f85d655eb1" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2011.png"><img style="width:960px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2011.png"/></a><figcaption>Mesh Teapot with No Wireframe and Default Flat Shading </figcaption></figure></div></div><div id="5121b15d-f2cf-4650-97ef-314f8fcad9d1" class="column-list"><div id="9196674e-2428-4dbe-bd9a-523623eab229" style="width:50%" class="column"><figure id="504f5018-94b9-4bfa-8fa8-a7dc323b7fed" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2012.png"><img style="width:957px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2012.png"/></a><figcaption>Mesh Teapot with Wireframe and Phong Shading </figcaption></figure></div><div id="5e213d0a-feea-4d2e-8bc8-80f12f855543" style="width:50%" class="column"><figure id="631482af-8026-49de-b468-6da2660e429c" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2013.png"><img style="width:957px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2013.png"/></a><figcaption>Mesh Teapot with No Wireframe and Phong Shading </figcaption></figure></div></div><h1 id="512fcc6a-84c3-4592-aacb-3c8bae78c301" class="">Part 4  -  Edge Flip</h1><div id="212973a9-6c9e-4625-84ad-3a2f636fdff8" class="column-list"><div id="628a61ec-53a5-4c8a-93d6-227c04a6d93e" style="width:50%" class="column"><figure id="0c8860ec-c525-4a04-b3b6-8aa459a8a978" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/BEFORE_FLIP.png"><img style="width:1240px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/BEFORE_FLIP.png"/></a><figcaption><strong>Figure 4.1.</strong> Borrowed from Carnegie Mellon University. <a href="http://15462.courses.cs.cmu.edu/fall2015content/misc/HalfedgeEdgeOpImplementationGuide.pdf">http://15462.courses.cs.cmu.edu/fall2015content/misc/HalfedgeEdgeOpImplementationGuide.pdf</a></figcaption></figure></div><div id="803157bc-b7ec-4f08-bd28-2e7b6559faf6" style="width:50%" class="column"><figure id="1b79b8c4-8750-4cfa-90ab-e0615fc1f896" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_12.26.03_PM.png"><img style="width:1242px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_12.26.03_PM.png"/></a><figcaption><strong>Figure 4.2. </strong>Borrowed from Carnegie Mellon University. <a href="http://15462.courses.cs.cmu.edu/fall2015content/misc/HalfedgeEdgeOpImplementationGuide.pdf">http://15462.courses.cs.cmu.edu/fall2015content/misc/HalfedgeEdgeOpImplementationGuide.pdf</a></figcaption></figure></div></div><p id="1204444e-9b10-4590-bd62-4b2cd2a39867" class="">Edge flipping is a fairly straight forward process which we implemented by doing the following:</p><ol type="1" id="be308d5c-4d6f-455f-84b6-c744bbe81749" class="numbered-list" start="1"><li>Compile a list of all the edges, vertices and faces involved in the flip</li></ol><ol type="1" id="e62a6703-ec81-408b-b49c-9033a4f7ddaa" class="numbered-list" start="2"><li>Discard any cases with boundary edges since they shouldn’t be flipped</li></ol><ol type="1" id="fe650085-5067-48b9-9e15-12a8ccf8bfb0" class="numbered-list" start="3"><li>Now we just need to reassign the neighbors of our chosen half-edges</li></ol><ol type="1" id="e9a0fafc-b836-4544-81a4-132b504740e8" class="numbered-list" start="4"><li>Then we make sure that all our edge’s values stay consistent with our new neighbors<ol type="a" id="aa810489-e15f-4ae7-863e-cc1207cea767" class="numbered-list" start="1"><li>Reassign the proper twins, but only for the outer edges</li></ol><ol type="a" id="2c747907-2ae1-4367-b7ae-4f071255ee9c" class="numbered-list" start="2"><li>Reassign vertices with their proper half edges</li></ol></li></ol><div id="53cac815-d441-434c-bd71-2995fee3c435" class="column-list"><div id="5c722518-f23c-44f0-8c98-13f97914df6e" style="width:50%" class="column"><figure id="3f65c3f8-d06f-4294-91a2-f1676e5db5dc" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2014.png"><img style="width:955px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2014.png"/></a><figcaption><strong>Figure 4.3</strong>. Edge 1 pre-flip</figcaption></figure></div><div id="a356fd33-f910-4b37-9a54-2c0c10bc7522" style="width:50%" class="column"><figure id="67a0a313-7799-41bb-9b14-f7597efbb206" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2015.png"><img style="width:955px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2015.png"/></a><figcaption><strong>Figure 4.4.</strong> Edge 1 post-flip</figcaption></figure></div></div><div id="ad3ce530-3b03-4f35-bd32-904cd10a9da9" class="column-list"><div id="9272c236-00f1-4e2b-8859-603cff014da4" style="width:50%" class="column"><figure id="48817269-ca1e-4986-87aa-f3a1190a0ae1" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2016.png"><img style="width:944px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2016.png"/></a><figcaption><strong>Figure 4.5.</strong> Edge 2 pre-flip</figcaption></figure></div><div id="49dde3d6-4ef4-4c1d-8d9e-d735e59833f7" style="width:50%" class="column"><figure id="b5bde46f-3ea2-4ee5-b4bf-4a9d34141421" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2017.png"><img style="width:949px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2017.png"/></a><figcaption><strong>Figure 4.6.</strong> Edge 2 post-flip</figcaption></figure></div></div><h1 id="ecd9a3d5-ebda-442b-a4ee-d9c7c897ffaf" class="">Part 5  -  Edge Split</h1><p id="e4e4f22e-4517-4e3a-920b-3105dc931b10" class="">Since we did not do the extra credit, we implemented<strong> </strong>edge splitting<strong> </strong>by doing the following:</p><ol type="1" id="5bdbe2a1-b5c0-46e9-80aa-9fa29a3e160a" class="numbered-list" start="1"><li>Compile a list of all the edges, vertices and faces involved in the split</li></ol><ol type="1" id="f78ce931-a02c-4357-81eb-7ba1d22d87e5" class="numbered-list" start="2"><li>Discard any cases with boundary edges since they don’t need to flipped</li></ol><ol type="1" id="c75d71b9-c152-49b4-a814-6931bb83a54a" class="numbered-list" start="3"><li>Create a new vertex that is the halfway point between edge that needs to be split</li></ol><ol type="1" id="a767fa39-d995-4b4b-b40d-2a3533d7622d" class="numbered-list" start="4"><li>Create the new faces and edges that will be spawned from performing the edge split</li></ol><ol type="1" id="7c6ba80e-f8a1-4bf5-a3d1-8baa802d2a02" class="numbered-list" start="5"><li>Assign these new elements their correct neighbors post split</li></ol><ol type="1" id="932b3200-8ef9-4358-9c87-74f8052d3562" class="numbered-list" start="6"><li>Now update the neighbors of existing elements that were affected by split</li></ol><div id="15772fc8-907b-4afc-894f-864e24e3950a" class="column-list"><div id="191711f9-c4bf-4698-abae-2ccdc2c09fb3" style="width:50%" class="column"><figure id="a07cca03-2508-4516-bdbf-1b4a7f66aa43" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2018.png"><img style="width:956px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2018.png"/></a><figcaption><strong>Figure 5.1. </strong>Edge 1 pre-split</figcaption></figure></div><div id="64945f1a-fcb6-412f-84f2-9fdead7e9990" style="width:50%" class="column"><figure id="15eff05b-1da6-4854-ba99-8fc37a37af3d" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2019.png"><img style="width:955px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2019.png"/></a><figcaption><strong>Figure 5.2. </strong>Edge 1 post-split</figcaption></figure></div></div><div id="938ec054-e0fc-42dd-96bc-deac29051183" class="column-list"><div id="4a64bc8a-8ed6-4516-9b20-f142ad01ff1e" style="width:50%" class="column"><figure id="a6de31aa-08ce-4691-a546-8d749b4bd865" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2020.png"><img style="width:955px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2020.png"/></a><figcaption><strong>Figure 5.3. </strong>Edge 2 pre-split</figcaption></figure></div><div id="6e0c2e4f-325f-4a53-b435-48e75d86d4c9" style="width:50%" class="column"><figure id="8ebebf09-82da-459f-b2f5-0f37bd11cea6" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2021.png"><img style="width:961px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2021.png"/></a><figcaption><strong>Figure 5.4. </strong>Edge 2 post-split</figcaption></figure></div></div><figure id="7497960a-b861-450f-ac0e-54851c645b54" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2022.png"><img style="width:954px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Untitled%2022.png"/></a><figcaption><strong>Figure 5.5.</strong> The split edge in figure 5.4 is now flipped. Note how it disappears. What’s actually happening is that it’s collapsing onto the highlighted edge.</figcaption></figure><p id="d5d7e397-76b0-4d5e-9890-4ecc7b0e7616" class=""><strong>Debugging Journey</strong></p><figure id="ba74c286-8a69-4714-af6b-3db089b2d31b" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_12.37.02_PM.png"><img style="width:708px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_12.37.02_PM.png"/></a><figcaption>Figure 5.6.</figcaption></figure><p id="e4bbb8d2-7096-4341-98f4-d1cca9b4a924" class="">To be honest, this was really painful to debug and just involved us drawing the diagram of a split mesh over and over again until we found an arrangement of pointers that jived with our implementation of upsampling. Our initial implementation of edge splitting worked ostensibly, but caused our upsample algorithm to freeze. Figuring out that this was the cause was something we found out from exhausting our options. Figure 5.6 represents our interpretation of the mesh post-split.</p><h1 id="6d5a27ce-906a-4e32-bfed-a2d8bc790542" class="">Part 6  -  <strong><strong>Loop Subdivision for Mesh Upsampling</strong></strong></h1><p id="8eac251d-1d3d-4cb0-b921-6745d22412e0" class="">We implemented loop subdivision by first precomputing the positions of the new vertices and then storing them in the class member variables. This is preferable to first splitting the edges and then calculating the positions, since if the position computation can be done ahead of time pre-element adding, it should. Then, we split the non-boundary edges, update the position of the vertex returned from the edge split. Following that, we flip any vertices that are connected to both an old and a new vertex, and finally we update the positions of all our old vertices. </p><div id="35edc10f-fce4-4e12-a11f-dab1cc5fc93c" class="column-list"><div id="ef3c682a-b975-45d9-a486-a3ac3f458edf" style="width:50%" class="column"><figure id="77ade329-7943-4f7d-bddc-0ce502df93aa" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.08.09_AM.png"><img style="width:1912px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.08.09_AM.png"/></a><figcaption><strong>Figure 6.1</strong> No upsampling</figcaption></figure></div><div id="11c2d6ac-910e-4853-b593-9a9785030291" style="width:50%" class="column"><figure id="ef88b6f7-d549-4162-880a-347c8683e523" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Na_Mesh_Feature_is_selected..png"><img style="width:1918px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Na_Mesh_Feature_is_selected..png"/></a><figcaption><strong>Figure 6.2</strong> No upsampling and wireframe</figcaption></figure></div></div><div id="632dde5a-249d-46ea-9979-dcefca5312ae" class="column-list"><div id="e2fb58c2-176e-4819-a7e5-683645b9d04f" style="width:50%" class="column"><figure id="13457188-aaa5-491c-80db-4c6b1d52b657" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.08.40_AM.png"><img style="width:1908px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.08.40_AM.png"/></a><figcaption><strong>Figure 6.3</strong> Upsampled once</figcaption></figure></div><div id="fcd89770-8eed-4e08-b368-207399e8e8d8" style="width:50%" class="column"><figure id="625153cd-a01b-4dd2-9beb-f318333de8d0" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/No_Mesh_Feature_is_selected..png"><img style="width:1904px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/No_Mesh_Feature_is_selected..png"/></a><figcaption><strong>Figure 6.4 </strong>Upsampled once and no wireframe</figcaption></figure></div></div><p id="f5b4eb1b-89e9-4ba8-9cfe-f8083abbc40d" class="">In the images of the four cows above, note that the first row is a plain cow.dae with no subdivision performed, while the row below represents the same model with one level of subdivision. The differences between figure 6.2 and 6.4 are already enormous. Figure 6.4 exhibits a much smoother surface throughout the mesh as a whole.</p><p id="865a2a34-11a7-4285-9603-4dbdd931add8" class="">Although it might not be apparent, what this implies is that sharp corners and edges<strong> </strong>are also smoothened out. This can be undesirable, depending on what sort of mesh you’re trying to render! Another issue with sharp corners and edges is that a simple mesh may transform into a shape that initially seems unexpected. One reason for this is that such mesh may not have enough edges before subdivision has been performed. We demonstrate this vividly with the figures below.</p><div id="f9e196fc-b464-4a51-9cc8-3d1e93a81c14" class="column-list"><div id="fcf7769d-265c-4474-a5b5-6fc61207ba81" style="width:50%" class="column"><figure id="adb09289-2405-48c3-bb83-ba392050be63" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.34.59_AM.png"><img style="width:1920px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.34.59_AM.png"/></a><figcaption><strong>Figure 6.5. </strong>Upsample of 0</figcaption></figure></div><div id="3441ce4d-3a9d-44b2-a1fd-179994c32c18" style="width:50%" class="column"><figure id="5a3d643e-7fd3-4da8-8652-f24f9317469e" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Na_Mesh_Feature_is_selected.%201.png"><img style="width:1910px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Na_Mesh_Feature_is_selected.%201.png"/></a><figcaption><strong>Figure 6.6.</strong> Upsample of 1</figcaption></figure></div></div><div id="cf99b23d-42d6-4a96-8496-2a1bc87e190b" class="column-list"><div id="9d9c0d3c-8246-4bf0-b1d2-bdc403d44a46" style="width:50%" class="column"><figure id="3342a4f0-77ac-4fc3-9ae5-7e866bfc76df" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Na_Mesh_Feature_is_selected.%202.png"><img style="width:1914px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Na_Mesh_Feature_is_selected.%202.png"/></a><figcaption><strong>Figure 6.7. </strong>Upsample of 2</figcaption></figure></div><div id="9e037d2b-62e8-4a3b-8b2d-7c2f46c3b409" style="width:50%" class="column"><figure id="70ab8f25-1391-4281-9f6a-f27020781b3b" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.35.27_AM.png"><img style="width:1918px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.35.27_AM.png"/></a><figcaption><strong>Figure 6.8.</strong> Upsample of 3</figcaption></figure></div></div><figure id="3b35c22b-e3ec-4281-87ba-ff8085961a0b" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.35.35_AM.png"><img style="width:1910px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.35.35_AM.png"/></a><figcaption><strong>Figure 6.9. </strong>Upsample of 4</figcaption></figure><p id="a605d5f3-10d1-4ebb-8c58-c994b5465b0b" class="">The effects that loop subdivision has on meshes that are not only close to uniform in proportion but sharp as well is no more apparent than in the cube.dae. Figure 6.5 to figure 6.9 illustrates the journey of an unwitting cube being relentlessly subdivided until it’s nothing but an echo of its former self. What sticks out through this metamorphosis is how our once symmetric shape is now grossly asymmetric. The reasoning for this might not be apparent at first, until we recall what each face of the cube in figure 6.5 are comprised of: two triangles!</p><p id="2cfc1ec3-61fc-4911-be9b-03e19ce2da94" class=""><strong>“Ah, so one reason for the cube’s asymmetry is because the holistic composition of its faces is asymmetric in nature. An answer to this is to first enforce symmetry on each face by first splitting the edge on each cube, and then perform loop subdivision! This will yield a symmetric polygon since every surface is now split evenly” </strong>is what you’re probably thinking, and you’re totally right! Behold <strong>Cube 2.0</strong>:</p><div id="a965d5a1-beb2-4b27-9797-db5a9cb9f1ad" class="column-list"><div id="e3849f24-a8ec-43a6-89f1-e18ce3785771" style="width:50%" class="column"><figure id="a2951bd5-11e0-4aa8-96d7-ccd561fe1e18" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.50.46_AM.png"><img style="width:1916px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.50.46_AM.png"/></a><figcaption><strong>Figure 6.10.</strong> Each face has a similar “X” marking, like some kind of sick battle scar</figcaption></figure></div><div id="77f81e67-2c8a-4e1e-8f1b-5a22a10b191a" style="width:50%" class="column"><figure id="191d8462-0990-4402-9551-13930d1b7fee" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.50.54_AM.png"><img style="width:1918px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.50.54_AM.png"/></a><figcaption><strong>Figure 6.11.</strong> Upsampled once.</figcaption></figure></div></div><div id="7a36870c-4f9f-4a67-8a98-9cd794e40e78" class="column-list"><div id="ce16535a-fb91-4cc9-92db-c79227859822" style="width:50%" class="column"><figure id="0746ef93-bb82-4f53-beb2-d378f8f088d2" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.51.01_AM.png"><img style="width:1906px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.51.01_AM.png"/></a><figcaption><strong>Figure 6.12. </strong>Upsampled twice</figcaption></figure></div><div id="44618f7b-9486-42fe-aa06-5dd208b81ba1" style="width:50%" class="column"><figure id="04e32acb-28a3-47fc-9f0a-c3f4531a2c22" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Assignment_2_MeshEdit.png"><img style="width:1912px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Assignment_2_MeshEdit.png"/></a><figcaption><strong>Figure 6.13. </strong>Upsampled thrice</figcaption></figure></div></div><p id="087820e6-dc98-4872-921f-4da53c52e793" class="">
+</p><figure id="2e78a6d1-ec28-4c76-b308-391f3e26943e" class="image"><a href="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.51.16_AM.png"><img style="width:1906px" src="Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d/Screen_Shot_2023-02-27_at_11.51.16_AM.png"/></a><figcaption><strong>Figure 6.14. </strong>Upsampled four times, and an aerial view</figcaption></figure><p id="ed84aa91-c862-422a-b56a-07dab96d35dc" class="">Our <strong>Cube 2.0</strong> is now beautifully subdivided and symmetric. Note that figure 6.10 to figure 6.13 are taken in the same perspective as figure 6.5 to 6.9 so that you may compare the differences. Figure 6.14 is an aerial shot of figure 6.13 after it has been upsampled one more time. </p><p id="e68831bb-23a2-40b4-86f2-1d3e579b7569" class="">
+</p><p id="03705a62-56b2-4cca-a539-39dcb1fb97d4" class=""><strong>Link to Webpage:</strong> <a href="https://eduardmirzoyan.github.io/cs184-webpage/">https://eduardmirzoyan.github.io/cs184-webpage/</a></p><p id="0dee89d5-192c-470c-a83f-cc853bbddd05" class="">
+</p></div></article></body></html>
