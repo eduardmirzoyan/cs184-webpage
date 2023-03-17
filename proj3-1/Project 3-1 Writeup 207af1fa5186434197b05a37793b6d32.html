@@ -1,0 +1,708 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Project 3-1 Writeup</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="207af1fa-5186-4341-97b0-5a37793b6d32" class="page sans"><header><h1 class="page-title">Project 3-1 Writeup</h1></header><div class="page-body"><p id="dec0b533-5295-40ce-aaf3-4399aa8dc852" class="">Eduard Mirzoyan, Johannes Fung</p><h1 id="84e616c9-0754-4b1b-bbb7-ea599720b021" class="">Overview</h1><p id="fbea8a06-a170-434b-a794-c2e41bb9755b" class="">This project focused on creating a realistic raytracer capable of emulating the reflection of light within a scene. We first began by generating ray from our camera into our scene in order to see what objects are within our field of vision. This step involved understanding how rays should interact with different surfaces such as triangles, planes and spheres. Our next step involved created a bound volume around the different objects in our scene. This was meant to improve rendering times as we would then be able to ignore certain sections of the scene depending on the direction of our rays. After forming bounding boxes, we could properly display static objects in our scene. The following part dealt with direct illumination. This was where we had to consider the BSDFs of our various objects and how they would interact with the rays of light from our light sources. We needed to implement both zero-bounce illumination and multi-bounce illumination. Then came global illumination. After our light hit our different surfaces we needed to calculated how those reflected rays would light the scene, this is where optimization would be needed in the form of Russian Roulette. In order to reduce computation time, we can randomly kill off rays whilst keeping the quality of the image. Our final goal would to further optimize our implementation by incorporating adaptative sampling, which would reduce the number times we sample at low noise areas.</p><h1 id="48d9a73b-85d2-4848-b3e0-b2bb93cf785f" class="">Part 1: <strong>Ray Generation and Scene Intersection</strong></h1><ul id="828f35ae-df17-45f1-b066-ce728f9e1457" class="bulleted-list"><li style="list-style-type:disc">Walk through the ray generation and primitive intersection parts of the rendering pipeline.</li></ul><figure id="85ce8645-c43e-4d68-af14-b3cb4ec03977" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Untitled.png"><img style="width:2162px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Untitled.png"/></a><figcaption>Figure 1.1. Courtesy of <a href="https://cs184.eecs.berkeley.edu/sp23/docs/proj3-1-part-1">https://cs184.eecs.berkeley.edu/sp23/docs/proj3-1-part-1</a></figcaption></figure><p id="bf3b98be-3943-4b00-ae9e-dc0eff21c3b5" class="">Our path tracer uses a camera to generate rays which are shot out into a scene that is filled with subjects of interest. However, the space which our scene resides and the scene which our camera resides are not the same. For standardization, when we generate a ray, we take in normalized 2D coordinates ranging from [0, 1] inclusive. The conversion from one space to another is illustrated in the figure above. Hence, our first task requires us to perform the coordinate space translation.</p><figure id="bae78136-c8e4-44fc-96b0-6b32a649bc6d" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Untitled%201.png"><img style="width:843px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Untitled%201.png"/></a><figcaption>Figure 1.2. Courtesy of <a href="https://cs184.eecs.berkeley.edu/sp23/docs/proj3-1-part-1">https://cs184.eecs.berkeley.edu/sp23/docs/proj3-1-part-1</a></figcaption></figure><p id="1e9dc7a0-2cc1-4fff-b2cd-f0dca174dd9d" class="">When ray tracing a pixel at coordinates (x, y), we take <code>ns_aa</code> samples of camera rays and traces them through the scene. We create a Vector3D that will store the summation of samples in the area (x,y) to (x+1, y+1) and then normalize it by dividing it by the number of samples before returning the radiance at a given point (x, y).</p><p id="5035f124-f102-4142-befa-50a0847f56b0" class="">
+</p><figure id="91768a33-0789-4aa6-9ee9-ec92c69fd928" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_9.21.33_PM.png"><img style="width:1110px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_9.21.33_PM.png"/></a><figcaption>Figure 1.3. A simple breakdown of how to implement Moller-Trumbore (courtesy of <a href="https://cs184.eecs.berkeley.edu/sp23/lecture/9-22/intro-to-ray-tracing-and-acceler">https://cs184.eecs.berkeley.edu/sp23/lecture/9-22/intro-to-ray-tracing-and-acceler</a>)</figcaption></figure><p id="fa64de74-a1e8-405f-8d87-63353ffa056a" class="">Our triangle intersection algorithm utilizes the Moller-Trumbore algorithm to efficiently test for intersection between a ray and a triangle. On a lower level, given the three points that define a triangle, we define two vectors <code>v1 = (p2 - p1)</code> and <code>v2 = (p3 - p1)</code> along with a vector that points to <code>p1</code> from the origin. From here, we take the cross product of the direction of the ray and <code>v2</code> as well as the cross product of the vector to <code>p1</code> from the origin with <code>v1</code>. From here, we use barycentric coordinates and its constraints to determine if an intersection has occurred. Finally, we update the intersection metadata accordingly.</p><div id="3a03146a-82a4-46d6-b9a4-c444a1adf24a" class="column-list"><div id="a07e331c-6ac5-4504-8fb9-6d67d8e56bf7" style="width:50%" class="column"><figure id="e78e5708-3b57-42ab-bfaa-ad29e0633d62" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBspheres.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBspheres.png"/></a><figcaption>Figure 1.4. CBspheres_lambertian.dae</figcaption></figure></div><div id="3b5e145c-609a-4292-9589-9d34922897a5" style="width:50%" class="column"><figure id="97a76cdf-206b-47cd-a575-e353b8922dab" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBempty.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBempty.png"/></a><figcaption>Figure 1.5. CBempty.dae</figcaption></figure></div></div><div id="d0bdfd9e-f80b-4d80-8932-2760ae2fae1b" class="column-list"><div id="4eaa2452-5251-4fba-b836-9c2edd01057e" style="width:50%" class="column"><figure id="29f87b7c-4744-4922-9a41-dfac553d804c" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/cube.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/cube.png"/></a><figcaption>Figure 1.6. cube.dae</figcaption></figure></div><div id="a223a30e-0841-494b-98c8-293da09e4eef" style="width:50%" class="column"><figure id="0e0bf306-8273-43c7-b784-eebf0cf733a7" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/plane.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/plane.png"/></a><figcaption>Figure 1.7. plane.dae</figcaption></figure></div></div><p id="65c15454-8709-4770-af7d-43b869eef85a" class="">The figures above demonstrate a couple of small .dae files that have been rendered after implementing intersection tests.</p><h1 id="36d6f8e6-3130-4a3f-8288-29e2d4263fd3" class="">Part 2: Bounding Volume Hierarchy</h1><p id="25e5dc4a-74bc-468e-9eb4-c156674df3b7" class="">Our BVH construction algorithm is straightforward: we first create the bounding box of all the primitives we’re currently looking at, and then we determine which axis has the largest extent. From there, we sort the primitives based on the centroid[axis] position and we choose the split point to be the point that evenly divides the primitives between the left and right node. This heuristic was initially chosen because we thought of it as a stepping stone to implementing more efficient heuristics. However, the speedup we found from this approach satisfied the runtime criteria stated at the end of part 2 that we decided to stick with it. As a bonus, due to our heuristic’s simplicity, changing it would be a straight forward matter.</p><p id="64a2c7f8-8d21-42b7-9feb-9bb1ca97271c" class="">
+</p><div id="f5d7d3a5-e058-45cb-b362-cc53ddd61c89" class="column-list"><div id="bedec829-ced2-4086-a126-c31af9646d80" style="width:50%" class="column"><figure id="76dac90a-e1a6-49e9-b7ef-28d80aa26ad6" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck.png"/></a><figcaption>Figure 2.1 CBlucy.dae</figcaption></figure></div><div id="8e9ccab1-6f37-4906-864a-075e2144a23e" style="width:50%" class="column"><figure id="40f4b19a-e1c3-4f23-b493-6ff1152bff9d" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck%201.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck%201.png"/></a><figcaption>Figure 2.2 beast.dae</figcaption></figure></div></div><div id="8180bbff-c7e2-4be5-9db1-4e5a89c7c4a0" class="column-list"><div id="efced300-acc4-4892-8356-89f9750f633a" style="width:50%" class="column"><figure id="588ffee5-db4f-4eb5-bde6-c359900f141b" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck%202.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck%202.png"/></a><figcaption>Figure 2.3 wall-e.dae</figcaption></figure></div><div id="c58d3086-d32c-4dcd-b47b-1152d9ee41e3" style="width:50%" class="column"><figure id="cf9ca102-9173-42a4-81ec-5c9fccb83a52" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck%203.png"><img style="width:800px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/maxplanck%203.png"/></a><figcaption>Figure 2.4 maxplanck.dae</figcaption></figure><p id="fdcd6bcd-2457-4238-a04b-43715aec8727" class="">
+</p></div></div><div id="c8f9e93f-fb69-4382-9c31-7fbac2c0fa3f" class="column-list"><div id="ac8a7132-0c0e-4448-b986-8ecf994c580f" style="width:50%" class="column"><p id="1027c953-9380-4ce6-a63a-5adf2310ad0a" class="">The figures above are .dae files that are relatively larger and would take a much longer time to render if we did not have BVH. The table below provides runtimes for rendering the same images above on a 13-inch 2017 Macbook Pro with the specs on the right if we had BVH and if we did not. We used 8 threads and rendered to a .png of size 800x600. Immediately one can notice the huge disparity between the runtimes, clearly illustrating the power of a BVH with a heuristic as simple as ours. Although  these renderings aren’t impossible without BVH, it’s simply too impractical.</p></div><div id="78b4c832-b15c-436c-8757-fa67bec49faa" style="width:50%" class="column"><figure id="468e7eeb-d921-47bb-8bdc-59166744d239" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_3.21.59_PM.png"><img style="width:704px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_3.21.59_PM.png"/></a></figure></div></div><p id="c5440d9b-9d86-4263-a895-982b2bbcef6e" class="">
+</p><table id="31d5ab1e-7a8a-433d-b45a-306279d2fc8d" class="simple-table"><tbody><tr id="8d33229a-342a-4fa2-9ba9-ddd88ed14e58"><td id="U_uT" class=""></td><td id="Hqg;" class="" style="width:263px">Runtime With BVH (seconds, 4 s.f.)</td><td id="IQkP" class="" style="width:277px">Runtime Without BVH (seconds, 4 s.f.)</td></tr><tr id="588fc769-55a0-46fa-86f6-2ef01fe03b83"><td id="U_uT" class="">maxplanck.dae</td><td id="Hqg;" class="" style="width:263px">0.4245</td><td id="IQkP" class="" style="width:277px">849.6785</td></tr><tr id="ed371e9e-8a77-48ff-89ba-b4fee04a07da"><td id="U_uT" class="">beast.dae</td><td id="Hqg;" class="" style="width:263px">0.2284</td><td id="IQkP" class="" style="width:277px">942.8271</td></tr><tr id="f41e0115-58de-4ec1-a8f0-2611c0ce7390"><td id="U_uT" class="">CBlucy.dae</td><td id="Hqg;" class="" style="width:263px">0.4182</td><td id="IQkP" class="" style="width:277px">2673.2552</td></tr><tr id="2c666d06-c7b0-4b27-963f-21d68a1498ab"><td id="U_uT" class="">wall-e.dae</td><td id="Hqg;" class="" style="width:263px">0.8417</td><td id="IQkP" class="" style="width:277px">6712.4421</td></tr></tbody></table><h1 id="0c177a15-4ff7-489e-a0bb-608fe14dc031" class="">Part 3: Direct Illumination</h1><p id="55ed82a5-5e8d-4312-8f7d-19ce42538c27" class="">In both importance and hemisphere direct lighting implementation, we instantiate a couple of key variables:</p><ol type="1" id="be2c9426-6bbe-4528-80b6-08d372d606ea" class="numbered-list" start="1"><li><code>o2w</code> - A object-to-world matrix that will take a Vector3D in object space and convert it to world space</li></ol><ol type="1" id="eba0b69b-90ca-4e9c-a1f3-f62e4927ae2a" class="numbered-list" start="2"><li><code>w2o</code> - A world-to-object matrix that is essentially the transpose of the matrix above.</li></ol><ol type="1" id="ddde2227-3831-4a55-96c4-e24788e1d44c" class="numbered-list" start="3"><li><code>hit_p</code> - The (x, y, z) coordinates of the hit in Vector3D.</li></ol><ol type="1" id="7d8b3c70-a7ee-441e-b485-bafd0a68f7e1" class="numbered-list" start="4"><li><code>w_out</code> - A Vector3D that points to the source of the ray</li></ol><ol type="1" id="eb287f13-a514-4a61-a47a-8e949117e271" class="numbered-list" start="5"><li><code>L_out</code> - A Vector3D that calculates the lighting.</li></ol><p id="010df7eb-a281-4eb5-8599-7f4728bf6abf" class="">We use almost all these variables in both implementations.</p><h2 id="401d906e-0f4a-4359-b636-4b07cd21b50d" class=""><strong><code>estimate_direct_lighting_hemisphere</code></strong></h2><figure id="bc38e21c-3694-4d7d-bfa5-37e2e088cbc6" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_6.36.13_PM.png"><img style="width:1470px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_6.36.13_PM.png"/></a><figcaption>Figure 3.1. Solving the Reflection Equation courtesy of <a href="https://cs184.eecs.berkeley.edu/sp22/lecture/13-23/global-illumination-and-path-tra">https://cs184.eecs.berkeley.edu/sp22/lecture/13-23/global-illumination-and-path-tra</a></figcaption></figure><div id="752862c6-df51-4ca1-b11b-2d427def41e5" class="column-list"><div id="69496166-42c8-4d41-8ba2-9b263c30adbf" style="width:50%" class="column"><figure id="9b750f48-a737-4e72-b3a6-f5f25f22f338" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBbunny_H_16_8.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBbunny_H_16_8.png"/></a><figcaption>Figure 3.2. CBbunny.dae generated with 16 samples</figcaption></figure></div><div id="7fdeaae1-47ee-476d-bcd2-ea8557aed9b4" style="width:50%" class="column"><figure id="9a7072d2-37c1-42ca-aca6-b695540a3a62" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBbunny_H_64_32.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBbunny_H_64_32.png"/></a><figcaption>Figure 3.3. CBbunny.dae generated with 64 samples, depth of 6</figcaption></figure></div></div><p id="63929202-606e-4fd6-a1ca-aab70489d9b2" class="">We adhere to the equation given above when calculating the direct lighting for a hemisphere. On a lower level, what this means is that we iterate N (number of samples) times and utilize a hemisphere sampling function to generate an incoming vector <code>wr</code>. However, <code>wr</code> is in object space and must consequently be converted to world space in order to get the <code>direction</code> vector. After that, we simply check whether or not a Ray from <code>hit_p</code> to <code>direction</code> intersects. If it does, then we want to add the estimated lighting from the struck point to <code>L_out</code>. Otherwise, we don’t want to do anything. At the end of our loop, we normalize <code>L_out</code> by dividing it by the number of samples taken.</p><h2 id="c1d87cab-bde2-45b7-9eae-b49561299666" class=""><strong><code>estimate_direct_lighting_importance</code></strong></h2><div id="3026625b-3cb0-4171-b49c-ffffd71ce5b2" class="column-list"><div id="993f6d31-8fd6-4e76-aa77-79194874c807" style="width:50%" class="column"><figure id="8ef3c1fb-d08b-481a-a5a2-da80bd17cefe" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_1_1.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_1_1.png"/></a><figcaption>Figure 3.4. CBbunny.dae generated with importance light sampling (8 samples).</figcaption></figure></div><div id="11f187d2-6e95-4dee-a253-4cf30b80ce71" style="width:50%" class="column"><figure id="9477c28c-26c0-4f1e-b276-b90096e6e45c" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_64_32.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_64_32.png"/></a><figcaption>Figure 3.5. CBbunny.dae generated with importance light sampling (64 samples, depth 6).</figcaption></figure></div></div><p id="aa56a323-f1fd-4f92-9ac3-70eba65a3799" class="">Our approach to this was fairly similar to the hemisphere approach with a few notable differences:</p><p id="757caec3-61d5-4568-94aa-75e36a35086c" class="">1) We create a temporary Vector3D to store the value we want to add to L_out, and then we iterate over the number of lights rather than samples.<div class="indented"><ol type="a" id="2ca3d9f0-aae9-428e-933a-47c1547227d3" class="numbered-list" start="1"><li>if the light is a point light source, then we sample it once.</li></ol><ol type="a" id="e33be0a9-7793-46f2-b9df-7b7e845c4024" class="numbered-list" start="2"><li>otherwise, we iterate <code>ns_area_light</code> times</li></ol></div></p><p id="faaccfe9-997b-4c99-bd4b-ffff0980b0d8" class="">2) When we create the Ray from <code>hit_p</code> to <code>direction</code>, we only add to <code>L_out</code> if it does not intersect and the cosine of the angle of reflection is negative (because Lambert’s Cosine Law).</p><p id="97eb3ef5-5e6e-41c3-ae21-da27aff573a9" class="">3) We normalize the temporary Vector3D by the number of samples and add it to <code>L_out</code> </p><p id="d4d17c07-8cb6-4eee-aab3-fda8a49ef939" class="">
+</p><p id="be2fb82b-375f-4163-bd0f-840c8bd98c7a" class="">The contrast between the CBbunny.dae rendering in Figure 3.5 and Figure 3.3 is enormous. Importance sampling has a much clearer picture as the noise in Figure 3.3 is attenuated. On top of the noise in the bunny model being reduced, the lighting of the bunny is accentuated by the crisp background. This is expected, since importance sampling is a technique that can yield more accurate results given precise modeling.</p><p id="560d4444-9cd9-48de-b688-069f9f9cbc03" class="">
+</p><div id="2b7b5e62-bcad-4e20-98cc-72000281f5a4" class="column-list"><div id="fb95ec34-e6de-4b65-b2f3-b314f7b0f319" style="width:50%" class="column"><figure id="f1d1c2ab-8a9e-4c28-9d16-eebd6a330dec" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_1.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_1.png"/></a><figcaption>Figure 3.6 -l 1 -s 1</figcaption></figure></div><div id="9ff25512-faf5-42fc-8e03-5ef1d6100bfe" style="width:50%" class="column"><figure id="02c678f1-244e-41c1-b647-7e32fac54303" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_4.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_4.png"/></a><figcaption>Figure 3.7 -l 4 -s 1</figcaption></figure></div></div><div id="cf57e9cc-6225-4d74-83ea-67c16e0a8c1d" class="column-list"><div id="00176956-5e3d-4794-be65-4216f62d1f0f" style="width:50%" class="column"><figure id="4bb457c0-883b-4c79-909c-31177e399409" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_16.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_16.png"/></a><figcaption>Figure 3.7. -l 16 -s 1</figcaption></figure></div><div id="78e071d6-38a9-4d2d-98cd-be23b47c8f43" style="width:50%" class="column"><figure id="3760eb93-8c86-47cf-87b8-2a29ed17be82" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_64.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_64.png"/></a><figcaption>Figure 3.8 -l 64 -s 1</figcaption></figure></div></div><p id="08ba850a-16f0-4a39-9a40-398c164f0124" class="">Using importance sampling with a sample of one and varying light rays, the shadows appear more refined the higher the number of light rays.</p><h1 id="781302ed-94a4-44a7-a615-dd346eaa180e" class="">Part 4: Global Illumination</h1><figure id="c9b24c42-8ed5-4aec-99cb-5f49ea0e31ed" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_7.54.28_PM.png"><img style="width:1290px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/Screen_Shot_2023-03-16_at_7.54.28_PM.png"/></a><figcaption>Figure 4.1. <a href="https://cs184.eecs.berkeley.edu/sp23/lecture/13-97/global-illumination-and-path-tra">https://cs184.eecs.berkeley.edu/sp23/lecture/13-97/global-illumination-and-path-tra</a></figcaption></figure><p id="9abcdc4a-5bd5-4182-8fcb-799b54a1aeb9" class="">Our implementation of the indirect lighting function is strikingly similar to the pseudocode presented in class lecture and also shares similarities between the direct lighting methods in Task 3.3 and Task 3.4. The rest of this section will present renderings of different models with varying parameters to illustrate our implementation of lighting. </p><div id="1466a51c-eb1c-47d0-b366-2930242dfa09" class="column-list"><div id="5001f51c-e8ef-4a91-9f81-6fb3c4cb5e8c" style="width:50%" class="column"><figure id="20ba0601-1c4c-40d8-bd8d-f367eb16428e" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m0.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m0.png"/></a><figcaption>Figure 4.2. CBbunny.dae with max_ray_depth of 0</figcaption></figure></div><div id="dd216ecf-a539-48bb-9721-8f98d3009e91" style="width:50%" class="column"><figure id="06b86473-d915-41cf-a6f6-d16f7b27cd5e" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m1.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m1.png"/></a><figcaption>Figure 4.3. CBbunny.dae with max_ray_depth of 1</figcaption></figure></div></div><div id="fff20270-e7be-41a5-8917-339fe9eb7f00" class="column-list"><div id="0c9b5e7f-832f-4b62-a0ff-1dd55b824787" style="width:50%" class="column"><figure id="bca7b824-4f9d-4149-b666-97050628809a" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m2.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m2.png"/></a><figcaption>Figure 4.3. CBbunny.dae with max_ray_depth of 2</figcaption></figure></div><div id="55b114c6-ba89-43ab-a4f0-4a4544a232c0" style="width:50%" class="column"><figure id="9bc8f491-8554-4af7-869e-6dbf95ab849e" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m3.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m3.png"/></a><figcaption>Figure 4.4. CBbunny.dae with max_ray_depth of 3</figcaption></figure></div></div><figure id="27afa557-689c-43f8-915c-e965febac947" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m100.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_m100.png"/></a><figcaption>Figure 4.5. CBbunny.dae with max_ray_depth of 100</figcaption></figure><p id="de7012f3-9b37-4613-bad7-c852662a53fa" class="">The increase in quality as we increase the number of ray bounces in the space drops dramatically. This is expected since with Russian Roulette termination, most rays don’t live for very long!</p><p id="10f63bb1-dc9f-4d34-bf98-9d29b61af2cc" class="">
+</p><div id="e9f3a48f-e91c-4f93-aaa0-e97906910652" class="column-list"><div id="a8ca0c68-97a0-4bff-a82b-da864135901e" style="width:50%" class="column"><figure id="3c0bf4e6-7900-474d-8b54-ed6626dbd0e6" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s1.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s1.png"/></a><figcaption>Figure 4.6. 1 sample</figcaption></figure></div><div id="318c5b8a-64e4-4525-a5ff-1135e96f89eb" style="width:50%" class="column"><figure id="c4fe3810-5ea2-471d-8995-9b78c8c06d7b" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s2.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s2.png"/></a><figcaption>Figure 4.7. 2 samples</figcaption></figure></div></div><div id="314d72f8-0360-44d6-a83e-a54e75da0d30" class="column-list"><div id="3568fa8d-c304-46b2-8500-4e4ce631b6c3" style="width:50%" class="column"><figure id="5c0238dc-acc2-4b37-bb28-b63b6abfc6d5" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s4.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s4.png"/></a><figcaption>Figure 4.8. 4 samples</figcaption></figure></div><div id="76776621-b5fa-486b-8977-6368e907955c" style="width:50%" class="column"><figure id="30ff683c-8db3-4144-8b38-e5d7bc49fc9f" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s16.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s16.png"/></a><figcaption>Figure 4.9. 16 samples</figcaption></figure></div></div><div id="7293c468-9cf8-4360-bb91-e3929b59307f" class="column-list"><div id="2ccc6009-e9aa-470f-9776-4accd2e1af43" style="width:50%" class="column"><figure id="5a96dbb3-6814-4975-82b5-9533e506b727" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s64.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s64.png"/></a><figcaption>Figure 4.10. 64 samples</figcaption></figure></div><div id="c8756217-9415-44e8-b0e8-0167e820b16a" style="width:50%" class="column"><figure id="ce6f5f10-5e2d-4b5f-b4cb-addba74c729e" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s1024.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/dragon_s1024.png"/></a><figcaption>Figure 4.11. 1024 samples</figcaption></figure></div></div><p id="d394b7f4-0484-43bd-9580-17ed6d3b191c" class=""><em>The renderings of the </em><em><code>dragon.dae</code></em><em> above each has a max_ray_depth of 5 and 4 light rays.</em></p><p id="1cb4b882-3ea0-407b-b1af-670585e08062" class="">Figure 4.6. to Figure 4.11 convey the difference in quality as we exponentially increase the number of samples while keeping the ray depth and light rays constant. What a jump in quality as we repeatedly increase the samples by a power of 2!</p><p id="925fbdac-891e-4352-b951-097182affd81" class="">
+</p><div id="86e2e14b-f8f1-4e17-b3ef-a3bb07663801" class="column-list"><div id="5da7684b-fa67-428d-b87f-01bdf1364fa8" style="width:50%" class="column"><figure id="ba16901d-d9e3-455b-837e-4bee4d8f186d" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/walle_direct_s1024.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/walle_direct_s1024.png"/></a><figcaption>Figure 4.12 WAAAALL-EE</figcaption></figure></div><div id="809a2cc3-5a37-4bda-9a8a-b19e09af974d" style="width:50%" class="column"><figure id="6e01b7da-fa70-4489-89c3-ddaea09a4123" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/walle_indirect_s1024.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/walle_indirect_s1024.png"/></a><figcaption>Figure 4.13 WALL-E</figcaption></figure></div></div><p id="86fc9a72-4310-4476-ba4a-c8f67854e58a" class="">The figure on the left is a rendering of wall-e.dae with direct lighting, while the figure on the right utilizes indirect lighting (max_ray_depth of 6 to be precise).</p><p id="12a69de8-a365-4e07-9582-4e19cab334a6" class="">
+</p><p id="471617d3-e4a9-4f61-8c75-6290b1ccb38e" class="">Finally, the images below are a couple of extra .dae we’ve rendered. Images on the left column were done using direct illumination, while images on the right were with indirect illumination. We used 64 samples, 16 light rays, and a maximum_ray_depth of 6 for each.</p><div id="69417341-52e7-41bd-ab2a-dd15f35341e3" class="column-list"><div id="cb854f70-3ea2-44da-9c78-943dbda14b14" style="width:50%" class="column"><figure id="db8477c9-5833-4c5a-b677-85c036e85647" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBempty%201.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/CBempty%201.png"/></a><figcaption>Figure 4.14. CBempty.dae with direct illumination</figcaption></figure></div><div id="02985444-4cf6-43fa-91e3-b1924128b529" style="width:50%" class="column"><figure id="cfdd0b05-60bb-4d33-b24a-d0ae48980a12" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/empty.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/empty.png"/></a><figcaption>Figure 4.15. CBempty.dae with indirect illumination</figcaption></figure></div></div><div id="942e168e-874e-4f8f-b116-ea080d251ab5" class="column-list"><div id="7511d56c-ee6f-4992-b5b3-e8e6b9e63e82" style="width:50%" class="column"><figure id="dc1e150b-627e-436f-ae60-1b7976d6af72" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/cbsphere.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/cbsphere.png"/></a><figcaption>Figure 4.16. CBsphere.dae with direct illumination</figcaption></figure></div><div id="1ea3daa0-1b87-4a60-a672-7df09605a45d" style="width:50%" class="column"><figure id="357243b1-121c-4d1f-bc3c-13dc7e507d58" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/cbsphere_indi.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/cbsphere_indi.png"/></a><figcaption>Figure 4.17 CBsphere.dae with indirect illumination</figcaption></figure></div></div><p id="6c1a6110-38df-4c50-aa5c-7a073dbac390" class="">
+</p><h1 id="8b5ae763-4562-4c0e-a3b5-cff2e35358e6" class="">Part 5: Adaptive Sampling</h1><p id="259ef63f-51ad-45ba-b50d-cd1673345d70" class="">Adaptive sampling reduces the number of samples for pixels that converge quickly while increasing the likelihood of sampling in important regions. While we can reduce noise by taking more samples per pixel, this would drastically increase our render time. Instead, we can use adaptive sampling to make pixels with low sample rates converge faster so we can focus on those in difficult parts of the image.</p><p id="7191be6e-d91d-4409-bfdd-e4f05710d972" class="">Our algorithm modifies our current implementation of raytracing pixels by checking if a pixel close to converging so we can skip sampling it more. As we trace samples through that pixel we create a running sum of the illuminance generated by the sampling process. Once we hit a certain iteration, in our case, a <code>samplesPerBatch</code>, we can test to see if we should prematurely end sampling. We do this by calculating primary variables, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span></span></span></span></span><span>﻿</span></span> and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> term using our running sum, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">s_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>, running sum squared, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">s_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> and sample count, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span>.</p><figure id="e3486bd4-e03e-4e0e-9fd3-4d50c9cf91b3" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>μ</mi><mo>=</mo><mfrac><msub><mi>s</mi><mn>1</mn></msub><mi>n</mi></mfrac><mspace linebreak="newline"></mspace><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>n</mi></mrow></mfrac><mo>∗</mo><mo stretchy="false">(</mo><msub><mi>s</mi><mn>2</mn></msub><mo>−</mo><mfrac><msubsup><mi>s</mi><mn>1</mn><mn>2</mn></msubsup><mi>n</mi></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu=\frac{s_1}{n}
+\\
+\sigma^2=\frac{1}{1-n}*(s_2-\frac{s_1^2}{n})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935599999999998em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.177108em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911079999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></span></div></figure><p id="ec2ed719-619c-46fd-85c6-f2d66d399854" class="">Then we compute a secondary variable I to measure the pixel&#x27;s convergence to compare it to our tolerance.</p><figure id="06aced1f-e806-48b5-b2b4-b19faa58eb2b" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>I</mi><mo>=</mo><mn>1.96</mn><mo>∗</mo><mfrac><mi>σ</mi><msqrt><mi>n</mi></msqrt></mfrac><mspace linebreak="newline"></mspace><mi>I</mi><mo>≤</mo><mi>m</mi><mi>a</mi><mi>x</mi><mi>T</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo>∗</mo><mi>μ</mi></mrow><annotation encoding="application/x-tex">I=1.96*\frac{\sigma}{\sqrt{n}}
+\\
+I\le maxTolerance*\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1.96</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.03756em;vertical-align:-0.9300000000000002em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.30972em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal">n</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9300000000000002em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.13597em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">an</span><span class="mord mathnormal">ce</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span></span></span></span></span></div></figure><p id="a8a8eb4e-984a-4901-9a64-064dc4264028" class="">If we exceed our tolerance, then we can assume that the pixel has converged and stop tracing more rays for this pixel. If not, we continue tracing.</p><div id="9e1d05dd-2e94-49c1-ad04-88b24fce5b3b" class="column-list"><div id="937d4e99-9d82-45da-8541-badaa9638344" style="width:50%" class="column"><figure id="0ac12711-092f-43cf-9aa5-4bac1ff5bf1b" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny.png"/></a><figcaption><strong>Bunny Original</strong>
+2048 Samples per Pixel
+Max Ray Depth = 5 
+1 Sample per Light</figcaption></figure></div><div id="ebabf00b-c062-4618-afce-c1b921704a61" style="width:50%" class="column"><figure id="00eb5523-60e1-4363-b9cc-92d240a4573f" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/banana.png"><img style="width:480px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/banana.png"/></a><figcaption><strong>Banana Original</strong>
+2048 Samples per Pixel
+Max Ray Depth = 5 
+1 Sample per Light</figcaption></figure></div></div><div id="1cbc9410-fd25-4571-8757-e0611cabc9b6" class="column-list"><div id="f7cc842c-ab72-4350-8dfe-af318dc718c1" style="width:50%" class="column"><figure id="a98fb9b8-8f28-4f70-b41a-7b0bf32e4e72" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_rate.png"><img style="width:336px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/bunny_rate.png"/></a><figcaption><strong>Bunny Sample Rate</strong>
+2048 Samples per Pixel
+Max Ray Depth = 5 
+1 Sample per Light</figcaption></figure></div><div id="8a9520b5-6a6c-4fc3-b74a-ea135f2eda77" style="width:50%" class="column"><figure id="d794d917-c73b-425e-99ca-bcc0453c42e1" class="image"><a href="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/banana_rate.png"><img style="width:336px" src="Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32/banana_rate.png"/></a><figcaption><strong>Banana Sample Rate</strong>
+2048 Samples per Pixel
+Max Ray Depth = 5 
+1 Sample per Light</figcaption></figure></div></div><h2 id="f4a1a187-3e30-4683-b9fc-1d90b51c4923" class="">What we Learned</h2><p id="9a6e1647-26ae-426d-9371-eadf28015287" class="">Working as partners, we split up the tasks based on our availability and schedules. We would often switch ownership of certain sections in order to balance our workloads. When we had overlapping free time, we would discuss the progress we’ve made and explain the steps we took to achieve the results we did. This allowed us to stay in sync and jump into different parts of the project easily. Through collaborating together, we’ve learnt the importance of documentation and tight communication, especially for a hefty project such as this one!</p><p id="0a5f1ae7-2dcd-4c73-b315-7d862ee3b21c" class="">
+</p><p id="884aba7a-7d94-4713-b157-e8220ee4d81e" class=""><strong>Link to webpage: </strong><a href="https://eduardmirzoyan.github.io/cs184-webpage/">https://eduardmirzoyan.github.io/cs184-webpage/</a></p><p id="e43e4abb-0d3d-4d1d-beb7-c5d32c5ad664" class="">
+</p></div></article></body></html>
