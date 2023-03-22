@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Project 3-2 Writeup</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e378031b-49b1-4177-a2a9-52f4100d6b5c" class="page sans"><header><h1 class="page-title">Project 3-2 Writeup</h1></header><div class="page-body"><p id="fc2467bf-ed7b-4926-be14-df919dcfc3fc" class="">Eduard Mirzoyan, Johannes Fung</p><h1 id="dccbb36a-0f3a-4afe-9377-0a99f0b068c6" class="">Overview</h1><div id="3d1043a3-85cf-4b4b-b8d2-c4fa5da681d0" class="column-list"><div id="85d8b0d2-c062-4ae6-97af-e862b04d1ff7" style="width:50%" class="column"><figure id="e0668897-f772-4db6-af6e-1ad60428aa8e" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_9.33.13_PM.png"><img style="width:1594px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_9.33.13_PM.png"/></a><figcaption>Figure 1. CBlucy.dae rendered with a max_ray_depth of 7, 4 light rays, 256 samples</figcaption></figure></div><div id="d4444d6d-492b-4ec0-80f5-8b2017698baa" style="width:50%" class="column"><figure id="b30e475d-b6ec-41f3-bcff-f352b0f103fc" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_11.06.48_PM.png"><img style="width:1602px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_11.06.48_PM.png"/></a><figcaption>Figure 2. CBdragon.dae rendered with a max_ray_depth of 7, 4 light rays, 256 samples</figcaption></figure></div></div><p id="ea3e8fb7-4648-4e7c-a5be-48818a16c4cd" class="">In Part 1, we simulated the BSDF of reflective and refractive materials by implementing a simple model that did a good job approximating the physics behind photometric phenomenons. To achive this, we first added a simple <code>reflect</code> function in our base BSDF class that would negate the (x,y) direction of a vector (we were allowed to make simplifying assumptions that made the reflection easier). For refraction, we utilized Snell’s Law and Total Internal Reflection to determine if a ray should refract and if so, in which direction. To wrap it all together, we added functionality for the MirrorBSDF and GlassBSDF which incorporated the reflect and refract functions in the base BSDF class to render pretty pictures like the ones seen above and below. </p><p id="c87a3de4-1d07-4fdb-8e7a-df0888ba73d1" class="">
+</p><p id="199c7d13-1959-42f8-9954-abc0791155cc" class="">In Part 4, we implemented the functionality of lenses into the rendering of meshes. This allowed us to emulate a depth of field effect into our final images. By replacing our old pinhole camera with a set of artificial lenses we can cast rays through these lenses and redirect them onto our plane of focus in order to simulate a focus/blur into our image. We can alter the depth at which our focus plane exists as well as the radius of the circle of confusion we generate.</p><h1 id="0bf506f8-5a3e-472b-85a1-bd674b652e88" class="">Part 1. Mirror and Glass Materials</h1><p id="be478913-2e9e-45f4-ba27-b6b06558a88d" class="">Show a sequence of six images of scene `CBspheres.dae` rendered with `max_ray_depth` set to 0, 1, 2, 3, 4, 5, and 100. The other settings should be at least 64 samples per pixel and 4 samples per light. Make sure to include all screenshots.</p><div id="ac1b33ce-fdfd-48ba-95af-4308ca67a6a9" class="column-list"><div id="f8fd994c-908e-42dd-aa00-45fb871d3968" style="width:50%" class="column"><figure id="1f49f313-c20b-4719-aee6-cde74c52e5b8" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.16.22_PM.png"><img style="width:1602px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.16.22_PM.png"/></a><figcaption>Figure 1.1. max_ray_depth of 0</figcaption></figure><figure id="2a85f7f0-986a-4e07-b5b6-84909a37c8ef" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.31.56_PM.png"><img style="width:1596px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.31.56_PM.png"/></a><figcaption>Figure 1.3. max_ray_depth of 2</figcaption></figure><figure id="45eb7c0d-4b9b-443c-99df-cf10704fd17b" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.39.58_PM.png"><img style="width:1598px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.39.58_PM.png"/></a><figcaption>Figure 1.5. max_ray_depth of 4</figcaption></figure></div><div id="c3d6909b-1b95-42f3-b0a7-45ab5be7eeec" style="width:50%" class="column"><figure id="6e7af9ee-ba9b-464c-81e4-f0c4956ad1b2" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.34.49_PM.png"><img style="width:1598px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.34.49_PM.png"/></a><figcaption>Figure 1.2. max_ray_depth of 1</figcaption></figure><figure id="6ef7373e-57f6-430d-8ea7-23b53c30f165" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.28.46_PM.png"><img style="width:1604px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.28.46_PM.png"/></a><figcaption>Figure 1.4. max_ray_depth of 3</figcaption></figure><figure id="e7e96140-2f58-455d-9f76-8539c40cd41f" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.43.48_PM.png"><img style="width:1596px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.43.48_PM.png"/></a><figcaption>Figure 1.6. max_ray_depth of 5</figcaption></figure></div></div><figure id="42e2cdc5-e1fe-4126-a6a8-fce28337eba2" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.49.44_PM.png"><img style="width:1600px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_6.49.44_PM.png"/></a><figcaption>Figure 1.7. max_ray_depth of 100</figcaption></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fca6e644-ae22-4515-a731-ae33d9490fce"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><em>The images above were all rendered using 64 samples and four light rays. The value of the maximum ray depth for each image is provided in the caption.</em></div></figure><p id="c3b2a4d8-30e4-4832-af2a-89b6ab1572b7" class="">
+</p><p id="ff00b7e4-cc35-4d1a-8770-de839ac4dd39" class="">In figure 1.1, we only see the point light source which is expected since if zero bounces are allowed, the only rays the camera would detect are those from point light sources. As we linearly increase the number of rays from 0, the scene becomes more defined. </p><p id="ab0d749e-1625-4a59-ae8b-88391c0fdebb" class="">With one ray, we can see the silhouette of the spheres and the reflection of the light source. With two rays the sphere made out of reflective material captures its surroundings, while the sphere made out of glass is still largely black. If you look hard enough, you can actually see the reflection of the room in the glass sphere. </p><p id="6a6ca622-a6c7-4c6c-a91c-eac037eedffe" class="">Once the ray depth hits three and onwards however, the glass sphere will instead look like it’s refracting the light bouncing off the room walls that are beaming into its hit points. The differences between the images beyond a max_ray_depth of 3 become much more subtle. For instance, on the reflective sphere on the left, the bottom of the sphere becomes noticeably brighter.</p><p id="39e5eaa3-bb60-4837-93ca-76764bc34107" class="">We can qualitatively break down each figure and expand on why they look the way they do.</p><p id="6cabb413-6c42-4e1c-a8c3-e50b4a9c608b" class="">An explanation for max_ray_depth of 0 has already been provided above. For a depth of 1, we see the room as well as the two spherical objects in the foreground. The spheres are jet black except for the top of it, which clearly reflects the light on the ceiling. For the reflective material, this is expected because for it to display a coarse visual of its surroundings, it must bounce at least twice. The same logic is true for the glass material.</p><figure id="b025b878-5907-423b-8cb3-618e507263a9" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_7.05.31_PM.png"><img style="width:1184px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Screen_Shot_2023-03-18_at_7.05.31_PM.png"/></a><figcaption>Figure 1.8. An explanation of Schlick’s model, taken from <a href="https://en.wikipedia.org/wiki/Schlick&#x27;s_approximation">https://en.wikipedia.org/wiki/Schlick&#x27;s_approximation</a></figcaption></figure><p id="6f6a2a7a-0112-4549-a1bf-00fed35a70da" class="">For a depth of 2, the reflective sphere on the left now encapsulates its surroundings, but the glass sphere on the right shows a very dark reflection of its surroundings. This can be attributed to our implementation of the GlassBSDF <code>sample_f</code> method, where we use Shlick’s approximation as a simplified way of modeling the actual physics behind the energy dispersement ratio. Specifically, in Figure 1.9, we calculate R(theta) where n1 is the index of refraction of air while n2 is the index of refraction of the object we’re entering. Then, the R(theta) value is used to determine a coin flip on whether or not a ray should reflect or refract. However, this only explains why our image with a depth of 2 appears to reflect - it does not explain the lack of refraction. This is simply because on the second bounce, the image is refracting inwards into the object. In order to display any refraction, there needs to be a third bounce to allow the refracted rays to reach the camera and other parts of the scene, such as the region of caustic light below the glass sphere.</p><p id="f7d412be-d477-4fb6-9f84-0221761c8543" class="">A depth of 3 and onwards confirms this, as each subsequent Figure from 1.4 onwards looks identical albeit some slight discrepancies as pointed out earlier. We can attribute these discrepancies to the fact that a higher depth means that we get to better capture the photometric energy that a point emits. Naturally, the more bounces we allow, the more light can illuminate certain regions such as the bottom of the left sphere.</p><h1 id="75e70f5b-0167-4668-a772-b964acb6e129" class="">Part 4: Depth of Field</h1><p id="6ab489bf-2970-48b8-b987-10510df27fa4" class="">Originally, we using ideal pinhole camera which puts everything within vision into focus. We are not able to apply blurring into our images. Real cameras, much like the human eyes, use a series of lens redirect rays of light. Since these rays are redirected to a point, this induces the concept of focused and unfocused sections in the resulting image. Those rays that lie on the focal distance from the lens are rendered clearly while those that are farther away (absolutely) are shown to be blurry. This can help with guiding viewers to focus on the important parts of the image whilst still maintain enough context.</p><p id="a5b86dd2-2b5b-4ed0-88f1-32e548b28466" class="">
+</p><p id="3bc3524a-f550-4180-9a57-c1ec608b9a00" class="">These following set of pictures show you the effects of changing the distance of the camera lens.</p><div id="3957a3a0-7f3d-45ea-9310-158c5e08bdea" class="column-list"><div id="a7dba24c-b64d-4a66-8c75-dc84da61e32f" style="width:50%" class="column"><figure id="a9793a53-3e34-4ff1-be19-a19ee9b8731d" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled.png"><img style="width:528px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled.png"/></a><figcaption>B = 0.23
+D = 4</figcaption></figure></div><div id="e680bbc5-86f7-42ec-9c53-55e00746e4b1" style="width:50%" class="column"><figure id="b8d39a13-3dc0-45fe-8410-daa550b3146b" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%201.png"><img style="width:384px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%201.png"/></a><figcaption>B = 0.23
+D = 4.5</figcaption></figure></div></div><div id="6625d848-f971-4e7d-aeec-2373275ca799" class="column-list"><div id="82d82cb6-2e09-46ec-9c55-68f74685421f" style="width:50%" class="column"><figure id="cd81de23-1821-48c9-bc82-fd21a77cdec3" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%202.png"><img style="width:513px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%202.png"/></a><figcaption>B = 0.23
+D = 5</figcaption></figure></div><div id="40d57ab5-9127-407b-9747-ec948f4ccb03" style="width:50%" class="column"><figure id="31c14270-79fe-4e65-9f8e-e3006bdf94fe" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%203.png"><img style="width:526px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%203.png"/></a><figcaption>B = 0.23
+D = 5.5</figcaption></figure></div></div><p id="e68555c4-47bc-431c-a85b-e7ae75a40b64" class="">As you can see, as the depth D decreases, objects farther behind become more blurry since the focal distance is closer to the camera. As we pass through depth 5, we can see the different parts of the dragon be focused until at 5.5, the prime location to be focused is behind the dragon, thus blurring everything again.</p><p id="90b75a12-bd4f-43fb-b8db-b036b45a7802" class="">
+</p><p id="17a82ddc-71c5-4490-9989-f7b5d5032f98" class="">These following set of pictures show you the effects of changing the aperture sizes of the camera lens.</p><div id="69f4b657-b664-428e-bfc2-e96429030d5a" class="column-list"><div id="2e3ad4f6-1db2-4c80-832c-b87334f96928" style="width:50%" class="column"><figure id="f797eef9-b030-4fc4-a602-2461338733b8" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%204.png"><img style="width:478px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%204.png"/></a><figcaption>B = 0
+D = 4.5</figcaption></figure></div><div id="0bea05ba-3c2c-4d49-86ee-640be7953d7c" style="width:50%" class="column"><figure id="0f3cbfb0-3156-4fea-9357-e18b7db4a96a" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%205.png"><img style="width:487px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%205.png"/></a><figcaption>B = 0.1
+D = 4.5</figcaption></figure></div></div><div id="a50f41b7-23c6-4046-9616-add1ee9ea64b" class="column-list"><div id="c327a051-a412-46fd-a1cd-a33171ab26c7" style="width:50.000000000000014%" class="column"><figure id="6bb8298c-4798-46d2-9fe7-4478bf11b6f1" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%201.png"><img style="width:384px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%201.png"/></a><figcaption>B = 0.23
+D = 4.5</figcaption></figure></div><div id="a9237734-ef0b-4927-9a83-11750ad26fae" style="width:50%" class="column"><figure id="77d9f3ac-2b0b-40d3-ada2-4c03c1744ca5" class="image"><a href="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%206.png"><img style="width:532px" src="Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c/Untitled%206.png"/></a><figcaption>B = 0.5
+D = 4.5</figcaption></figure></div></div><p id="12770ca4-9740-4d10-819b-7d42df514d30" class="">As you can see, as we decrease B to 0, the circle of confusion so wide that it has virtually has no effect on the final image. But as we increase B towards 1, we can see the circle of confusion get smaller such that only a segment of a part of the dragon is in focus.</p><h2 id="3492aab3-92da-4731-ad92-c5c60b82e3fc" class="">What we Learned</h2><p id="9d9e50b2-b311-420f-9b99-1c016b5ffe8c" class="">As partners, we divided the responsibilities according to our schedules and availability. Sometimes, we would exchange control over specific segments to distribute the workload evenly. During our shared available time, we would converse about our achievements and describe the methods we employed to achieve them. This kept us on the same page and enabled us to switch between various project components effortlessly. Our collaboration taught us the significance of thorough documentation and effective communication, particularly when working on a significant undertaking like this one.</p><p id="23eb9571-68fa-460e-9392-994300e1c673" class="">
+</p><p id="75fdb869-eb08-4b8e-ba6e-71506bdcf673" class=""><strong>Link to webpage: </strong><a href="https://eduardmirzoyan.github.io/cs184-webpage/">https://eduardmirzoyan.github.io/cs184-webpage/</a></p><p id="b0b711f4-8356-4b9e-a85a-3363e52d82b9" class="">
+</p></div></article></body></html>
