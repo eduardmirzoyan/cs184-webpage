@@ -1,27 +1,34 @@
 <html>
-	<head>
-	</head>
-	<body>
-		<h3>CS184/284A Project Webpages</h3>
-		<br><br>
-		<a href="/proj1/Project%201%20Write%20Up%2013faa0a26aef4a1bbac8984cf60c0a84.html">Project 1</a>
-		<br><br>
-		<a href="/proj2/Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d.html">Project 2</a>
-		<br><br>
-		<a href="/proj3-1/Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32.html">Project 3-1</a>
-		<br><br>
-		<a href="/proj3-2/Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c.html">Project 3-2</a>
-		<br><br>
-		<a href="/proj4/Project%204%20Writeup%2056044e9a66cf495195a6bf56bb467351.html">Project 4</a>
-	</body>
-	<script>
-		var links = document.body.getElementsByTagName("a")
-		var a = window.location.href.indexOf(".io")
-		var repo_name = window.location.href.substring(a+3)
-		for(var i = 0; i < links.length; i++){
-			var link = links[i]
-			var actual_name = link.href.substring(link.href.indexOf(".io")+4)
-			link.href = repo_name + actual_name
-		}
-	</script>
+
+<head>
+</head>
+
+<body>
+	<h3>CS184/284A Project Webpages</h3>
+	<br><br>
+	<a href="/proj1/Project%201%20Write%20Up%2013faa0a26aef4a1bbac8984cf60c0a84.html">Project 1</a>
+	<br><br>
+	<a href="/proj2/Project%202%20Write%20up%20a1090e9c708546deab9f1cff353a559d.html">Project 2</a>
+	<br><br>
+	<a href="/proj3-1/Project%203-1%20Writeup%20207af1fa5186434197b05a37793b6d32.html">Project 3-1</a>
+	<br><br>
+	<a href="/proj3-2/Project%203-2%20Writeup%20e378031b49b14177a2a952f4100d6b5c.html">Project 3-2</a>
+	<br><br>
+	<a href="/proj4/Project%204%20Writeup%2056044e9a66cf495195a6bf56bb467351.html">Project 4</a>
+	<br><br>
+	<a href="/proj5/CS184%20Project%20Milestone%20Pixel%20Physics%20Simulation%20d887940b7eba422a82a724168dce7423.html">Final
+		Project</a>
+	<br><br>
+</body>
+<script>
+	var links = document.body.getElementsByTagName("a")
+	var a = window.location.href.indexOf(".io")
+	var repo_name = window.location.href.substring(a + 3)
+	for (var i = 0; i < links.length; i++) {
+		var link = links[i]
+		var actual_name = link.href.substring(link.href.indexOf(".io") + 4)
+		link.href = repo_name + actual_name
+	}
+</script>
+
 </html>
