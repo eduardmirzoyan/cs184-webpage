@@ -1,0 +1,709 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS184 Project: Pixel Physics Simulation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="38486702-57cf-453e-84e9-d3c26d46b2c3" class="page sans"><header><h1 class="page-title">CS184 Project: Pixel Physics Simulation</h1></header><div class="page-body"><h1 id="67fca594-c3d0-4dd8-b17f-8b38d5c0c85a" class="">Abstract</h1><p id="d19298be-fba3-4168-abd0-9127167c7209" class="">We decided to create a cellular automata-based physics simulation engine that only uses pixels as representations of different elements. We aimed to create a live and interactive system where each element will function under its own set of rules, allowing us to birth a complex ecosystem though combinations of said elements. In our final implementation, we have a plethora of elements to choose from such as wood, water, sand, fire and even bees! You can press <strong>TAB</strong> access a makeshift UI system to view all the possible elements. Once you made your choice, use <strong>LEFT CLICK</strong> to spawn that element into the scene. Simulation will occur automatically so you can sit back and watch your creation moves in its world. You can use <strong>RIGHT CLICK</strong> to remove existing elements from the scene. If you want to start over, the <strong>R</strong> key will clear <em>all</em> pixels from the scene. As different elements collide with each other, we can see realistic results occur. For example, if spawn a fire element next to a long strip of wood, you can see the fire slowly consume the piece of wood, removing it from the scene and converting it into smoke and ash. Pouring water into a bowl shaped solid object will contain the water as it swishes back and forth. In summary, we’ve implemented a version of cellular automata with the goal to mimic reality.</p><h1 id="a726d80d-a567-4212-9c42-13052a41c0a0" class="">Technical Approach</h1><h3 id="414deb06-e2d3-47a3-a6a6-4e6e2b421df3" class="">Engine</h3><p id="25f6e1cb-517d-40ab-98c9-14b9e9049f0b" class="">We coded the engine in C++ using OpenGL to handle the rendering. C++ is naturally a faster language and allows us to avoid dealing with memory safety. We set up the entire engine from scratch using GLFW for window and input handling, GLAD for OpenGL initialization, GLM for math utilities, and custom-built CMake scripts. OpenGL allowed us to utilize our GPUs to render our simulation though much of the simulation happens on the CPU—though we aimed to parallelize this through multithreading or compute shaders, we ran out of time. </p><p id="5bc0562f-129b-40a1-92d1-20285e0752f7" class="">Everything in the game is simulated using a 2D grid of cells and rendered onto a quad which is passed to OpenGL for rendering using a nearest neighbor shader. The game is divided into two main sections, the World and the UI, both of which have their own grid to work with. The world grid is running the main simulation of the game, while the UI grid pauses all simulations to perform custom handling of input and cell behavior. This UI also features text rendering directly within the grid, which is done using a C-based bitmap font that is turned into cells.</p><h3 id="0fb94f14-3070-43ad-970a-005eea8b0b4d" class="">Algorithms</h3><p id="cd2114a9-a472-4bdc-9924-6ae1c5e18cf8" class="">The biggest decision of this project was deciding on how to actually simulate the set of pixels. Referencing a <a href="https://www.youtube.com/watch?v=prXuyMCgbTc">talk</a> given at GDC by game developer, Petri Purho, we decided to cellular automata approach which uses a neighbor-based physics algorithm instead of the typical versions used in popular game engines. At a high level, our implementation uses the immediate 8 neighbors of each cell to decide on how the cell should act. We iterate through our entire grid of cells and sample each one. Many sandbox simulators and games like <a href="https://noitagame.com/">Noita</a>, use this as their preferred method of simulation since it is easy to understand and requires very little overhead. You could even take things a step further by sectioning the grid into “chunks” and use multi-threading to handle each one.</p><p id="75a46641-c35f-433c-b7a6-c1fb93a5b736" class="">The only data structure we use to represent our cells is a Cell class. Each cell’s properties can be broken into 2 parts: </p><ul id="fa214fc6-6eca-4e41-97fc-965c6269bd45" class="bulleted-list"><li style="list-style-type:disc">A single cell behavior enumerator, which dictates <em>how</em> the cell will act,</li></ul><ul id="1c652916-3c9c-416c-9e3d-d89679c07b85" class="bulleted-list"><li style="list-style-type:disc"> A series of physical traits (mass, combustibility, lifetime, etc.), which dictates <em>to what degree </em>will the cell act</li></ul><p id="32f4be3a-753f-4d54-b564-518635b90da6" class="">In layman terms, an <span style="border-bottom:0.05em solid">element</span> defined by a preset combination of a Cell Behavior and specific physical traits. In our code, this is called a <span style="border-bottom:0.05em solid">cell</span>.</p><p id="16b84387-e03b-498a-8974-98ad1605cb1d" class="">Here is a snippet of our <code>Cell.h</code> class code:</p><pre id="ff6f469e-e5a7-4442-8777-71f4ab403dab" class="code"><code>enum CellBehavior
+{
+    NONE = 0,
+    LIQUID,
+    MOVABLE_SOLID,
+    IMMOVABLE_SOLID,
+    PLASMA,
+    GAS,
+    BEE
+
+		...
+};
+
+class Cell
+{
+public:
+    ...
+
+    /** Name of the cell type. */
+    std::string name;
+    /** Color of the cell. */
+    glm::u8vec3 color;
+    /** Type of behavior to expect from this cell. */
+
+    CellBehavior behavior;
+
+    /** Mass of the cell for physics behavior. */
+    double mass;
+
+    /** Life time of the cell. Useful for things that should perish i.e. fire. */
+    double lifetime;
+
+    /** Some cells just want to see the world burn */
+    bool is_combustible;
+
+    /** Chance of the cell proliferating into the air. */
+    double spread_chance;
+		
+		...
+};</code></pre><p id="d318d9ae-5b24-4e49-8e6e-57d4fd0e01be" class="">Here’s a small description about each of our implemented Cell Behaviors:</p><ul id="50aa5391-8863-4727-9794-1db484e0cc63" class="bulleted-list"><li style="list-style-type:disc">NONE<ul id="206f6940-c7fe-4088-a3f1-ce792ce073b9" class="bulleted-list"><li style="list-style-type:circle">Used to represent an empty cell.</li></ul></li></ul><ul id="b59949d3-cdf0-4b17-ae2f-887fe912edff" class="bulleted-list"><li style="list-style-type:disc">IMMOVABLE_SOLID<ul id="02827922-d1a7-4dc1-a085-bfba0f1accbf" class="bulleted-list"><li style="list-style-type:circle">The element is stationary, and does not interact with its surroundings.</li></ul></li></ul><ul id="4c389e0f-8b1c-4096-bfcc-dfa228a0fd16" class="bulleted-list"><li style="list-style-type:disc">MOVABLE_SOLID<ul id="0adfac2a-fd83-4c75-80fe-f63d717545b4" class="bulleted-list"><li style="list-style-type:circle">The element mimics gravity by always attempting to fall straight downwards.</li></ul></li></ul><ul id="56ac2f97-6592-440f-9f55-5f44d9c3c0b3" class="bulleted-list"><li style="list-style-type:disc">LIQUID<ul id="f78f836a-1805-4de1-8ed2-7cac0e76e0e5" class="bulleted-list"><li style="list-style-type:circle">Similar to the MOVABLE_SOLID, except that it also fall diagonally to left or right if available. When on a flat surface of cells, the element will flow left and right, mimicking the look of waves.<ul id="d0cfc8aa-6094-47ba-abbd-e97fc72b5cae" class="bulleted-list"><li style="list-style-type:square">Directional falling is chosen randomly if possible to make it seem more natural</li></ul></li></ul></li></ul><ul id="b8380a2c-cc45-4e79-badd-706be2f4654c" class="bulleted-list"><li style="list-style-type:disc">PLASMA<ul id="ce002834-7e3e-48d8-9597-927bb8b65396" class="bulleted-list"><li style="list-style-type:circle">Simulates fire-like behavior. Attempts to spread itself to neighboring cells based on its spread chance property. </li></ul></li></ul><ul id="b5c613a9-f9eb-47d8-aa6e-52f1458386ec" class="bulleted-list"><li style="list-style-type:disc">GAS<ul id="646b74d7-d9b0-44de-bd44-c4ed76c3a1ba" class="bulleted-list"><li style="list-style-type:circle">Simulates gaseous matter. Similar line of logic as liquids but considers neighbors above and diagonally above it. Often uses the cell’s lifetime property to remove itself from the scene after a set number of time cycles.</li></ul></li></ul><ul id="7081045b-7b8c-45dd-b991-812dabebec34" class="bulleted-list"><li style="list-style-type:disc">BEE<ul id="39c61b33-445e-403b-b105-c042e0289f23" class="bulleted-list"><li style="list-style-type:circle">The only behavior that functions as a living entity. Imitates a wandering bee that flies around randomly.</li></ul></li></ul><p id="4ca2d2ab-5a70-4d7f-ae90-a560040e3288" class="">Here’s a deeper look into a few of our favorite elements and how they are implemented.</p><ul id="e7ba69ed-64c3-4432-816a-3e57ddfb9707" class="bulleted-list"><li style="list-style-type:disc"><strong>Stone</strong>: The most basic element. Not affected by gravity nor can be set on fire. It kinda just sits there. Has no simulation logic, since it’s never expected to move in the scene.</li></ul><ul id="64a6b3b8-1076-4b26-a367-f16974a95122" class="bulleted-list"><li style="list-style-type:disc"><strong>Grass</strong>: A solid like Stone, but affected by gravity and quite combustible.</li></ul><ul id="b5d0da8f-8c4b-4de8-a1f1-4f9e2903581e" class="bulleted-list"><li style="list-style-type:disc"><strong>Water</strong>: A basic liquid that finds the lowest possible cell it can and will swish around endlessly.</li></ul><ul id="1d7fe901-1545-44e1-8901-b6a2457a6542" class="bulleted-list"><li style="list-style-type:disc"><strong>Fire</strong>: A “plasma” element that will ignite neighboring <em>combustible</em> cells into new file elements. A single smoke element will also be created.</li></ul><ul id="a0429f8f-9e55-4266-aa16-874a206443c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Smoke</strong>: Holds the same logic as water but in reverse. Attempts to go to the highest possible cell it can. Smoke is also limited by a lifetime trait which cause it to dissipate after a set number of time steps.</li></ul><p id="81dae02c-1c96-4e48-9595-081d5b9ab0d6" class="">The last part to touch on is the implementation of our UI. We use another similar but separate 2D grid to act as a UI display. Since we can already handle mouse inputs and map them to coordinates in a grid, we implemented an auxiliary grid (that doesn’t interact with our main physics grid) to hold all the different type of elements we want our users to access to. Then, once we are in UI mode, we can interpret a mouse click as a selection for an element to draw. This design choice allowed us to save time from making a whole separate UI system by reusing features we’ve already developed.</p><h3 id="846983e3-8327-49bf-bc17-44844fa29a3a" class="">Problems &amp; Lessons</h3><p id="b7dfbb42-234a-45b8-9f86-58fa2d37d403" class=""><strong>Ed:</strong> One of the initial problems we needed to uncover before we even started coding was designing the infrastructure of our simulator. As state previously, we were deciding between a typical real-world physics engine vs a cellular automata style implementation. The real world physics approach would involve too much overhead such implementing a constant check for gravity, fluid motion, air pressure and more. This would only continue to grow as we would add new elements. The cellular automata angle allowed us to view each element in its own box and take a more modular approach. New features could simply be tacked onto our existing cell class and handled case by case in our simulate function. This approach was also much more intuitive for us, since we had real-life examples of it being used in games.</p><p id="a9e7d403-d671-4fc4-aaac-de63482318a8" class=""><strong>Miguel</strong>: Having little experience in OpenGL, getting the engine up and running was quite challenging. After following a bunch of different sources like LearnOpenGL, I was able to get textures to render onto a quad on the screen. It was especially challenging getting the quad to render at an appropriate size without stretching the cells. I initially implemented a system to resize the quad to always maintain its ratio within the window; however, this ended up making the event handling too complicated because it required converting a mouse position to a grid coordinate position with a dynamically sized grid. So I ended up disabling the resizing windows. All that was left to do was turn the grid of cells into textures in every frame. </p><p id="09408760-4e3c-450f-9fe1-8855800769f6" class=""><strong>Johannes:</strong> An issue that I found towards the tail end of development was figuring out interactions between specific cells and how to produce results that should be exclusive to two types of Cells i.e. if lava touches a bee, the bee should burn. This was particularly tricky because we didn’t use inheritance to represent different Cell types. Instead, we have a singular Cell type which is characterized by a set of parameters and behavior-type. The former would describe a Cell’s color, velocity, mass, etc while the latter would denote its state of matter. The reason it was difficult to figure out specific interactions was because I did not properly think the Cell class’ parameters through, and ended up bloating the Cell class with extraneous variables to distinguish a Cell type from another. Although it’s not a large issue for this project, had this project needed to scale further, we would run into a lot more code-bloat. In hindsight, I would spend much more time fleshing out the Cell class before diving into the code.</p><p id="d8a56b18-3570-4661-9242-7d0796cf1185" class=""><strong>Manh:</strong> Water movement has the most issues. One of them was the random direction movement, since C++ rand() is biased, thus std::mt_19937 comes in with a more uniformed integer distribution. Another problem was the grid is updated from left column to right column, then bottom row to top row. However, everything is supposed to happen simultaneously at the same time within one time step. When one cell is moved to another location, the loop might encounter this cell again, and then update it, resulting in jumping pixel effect. One way to solve it was only keep track of one movement at one interaction happen at one time step at a time. Since the grid is updated every discrete delta time, implementing real physical properties such as velocity and force was not as simple. Instead, velocity can be implemented by random delay.</p><h1 id="0e9fc4b5-9bfe-44c4-9cba-e8c42742806f" class="">Results</h1><h3 id="579dfd6a-00d4-4c8a-bacc-255a16781613" class="">Demo Video</h3><figure id="92c64f86-2a2f-4c7d-88ed-45f2d4ff54a7"><div class="source"><a href="https://www.youtube.com/watch?v=F4CFoEMGdS4">https://www.youtube.com/watch?v=F4CFoEMGdS4</a></div></figure><h3 id="054e9f19-fcab-421d-b47c-47d3b8ed8b0e" class="">Screenshots</h3><figure id="d37964ad-85fd-4a4a-bcb6-60aee5ab8c36" class="image"><a href="CS184%20Project%20Pixel%20Physics%20Simulation%203848670257cf453e84e9d3c26d46b2c3/Screen_Shot_2023-05-02_at_9.00.10_PM.png"><img style="width:1198px" src="CS184%20Project%20Pixel%20Physics%20Simulation%203848670257cf453e84e9d3c26d46b2c3/Screen_Shot_2023-05-02_at_9.00.10_PM.png"/></a></figure><div id="91b46dba-9e21-4d47-8781-ca3e3e2c59a3" class="column-list"><div id="1111d921-77bb-4749-b257-25fedf58b3cf" style="width:50%" class="column"><figure id="82ec10dc-c546-4d67-b05b-b4490e94f184" class="image"><a href="CS184%20Project%20Pixel%20Physics%20Simulation%203848670257cf453e84e9d3c26d46b2c3/Screen_Shot_2023-05-02_at_8.36.51_PM.png"><img style="width:1188px" src="CS184%20Project%20Pixel%20Physics%20Simulation%203848670257cf453e84e9d3c26d46b2c3/Screen_Shot_2023-05-02_at_8.36.51_PM.png"/></a></figure></div><div id="d0079bcd-afc4-4d82-8620-831664154414" style="width:50%" class="column"><figure id="6181f5bc-9fd2-45d0-a3ba-37761b733a8d" class="image"><a href="CS184%20Project%20Pixel%20Physics%20Simulation%203848670257cf453e84e9d3c26d46b2c3/Screen_Shot_2023-05-02_at_8.37.04_PM.png"><img style="width:1198px" src="CS184%20Project%20Pixel%20Physics%20Simulation%203848670257cf453e84e9d3c26d46b2c3/Screen_Shot_2023-05-02_at_8.37.04_PM.png"/></a></figure></div></div><h1 id="a1ddbd30-0681-40b5-a3e4-26d19ba93caa" class="">References</h1><p id="2a7018c0-fd85-47f1-8719-c20671050141" class="">Our resources consisted mainly of the popular sandbox rogue-like game, <a href="https://noitagame.com/">Noita</a>, and past web-based sandbox simulators.</p><ul id="9e1fa777-8c65-44d1-a754-b03ecdb78131" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.youtube.com/watch?v=prXuyMCgbTc">Noita’s Game Developer Conference (GDC) talk</a></li></ul><ul id="3e0272a8-2cf3-4b41-80a5-ec885e890a09" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.glfw.org/">https://www.glfw.org/</a></li></ul><ul id="ff2bff34-c62e-40d9-8f02-3583f1a60d93" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sandboxels.r74n.com/">https://sandboxels.r74n.com/</a></li></ul><ul id="f394b4e5-276e-4605-ba15-a89f2b64b340" class="bulleted-list"><li style="list-style-type:disc"><a href="https://w-shadow.com/blog/2009/09/29/falling-sand-style-water-simulation/">https://w-shadow.com/blog/2009/09/29/falling-sand-style-water-simulation/</a> </li></ul><ul id="843e15d2-d128-41be-afde-dff18c3e9eee" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.youtube.com/watch?v=VLZjd_Y1gJ8">https://www.youtube.com/watch?v=VLZjd_Y1gJ8</a></li></ul><h1 id="e43bfb7d-f1c5-490b-acd0-6ae3eb7c9ce4" class="">Contributions</h1><h3 id="cfadebb2-5c97-4765-a84e-92dac3d47c03" class="">Eduard Mirzoyan</h3><ul id="e636a3d6-1c8d-4563-b379-4b3105733780" class="bulleted-list"><li style="list-style-type:disc">Designed the infrastructure of the cells class and simulation</li></ul><ul id="7a2e5184-a177-4e8d-98d7-79eca2ab1f7d" class="bulleted-list"><li style="list-style-type:disc">Handled most of the written portion of the project</li></ul><ul id="9f71dfe3-7abf-4b7e-a894-3abcbbd93508" class="bulleted-list"><li style="list-style-type:disc">Set up and hosted the website for each checkpoint</li></ul><ul id="22f931b1-1d33-4b98-b26b-ac88667463a9" class="bulleted-list"><li style="list-style-type:disc">Worked with Johannes to refactor cell class to be more modular</li></ul><h3 id="67d28f29-340c-4797-baa8-d4c488eb634d" class="">Miguel Tenant de La Tour</h3><ul id="63846c4f-dcc3-4a70-a741-cdec6ecf8143" class="bulleted-list"><li style="list-style-type:disc">Setup project with cmake, compiler, etc</li></ul><ul id="134f289a-bdfc-4d91-b9b1-76105f04ab77" class="bulleted-list"><li style="list-style-type:disc">Implemented engine including OpenGL and GLFW setup, grid rendering, etc.</li></ul><ul id="7810f653-abcb-4602-9b72-eee78757e43a" class="bulleted-list"><li style="list-style-type:disc">Implemented UI behavior and text rendering</li></ul><ul id="2917edd4-de3c-40b1-aea7-9289ee38ff7f" class="bulleted-list"><li style="list-style-type:disc">Refactored UI and World simulation system as well as event/callback handler for faster iterative process</li></ul><h3 id="e6cf81bc-24fe-424d-b0a2-932832fbe6eb" class="">Johannes Fung</h3><ul id="8982c25b-a20c-469d-9c31-16e9520673a0" class="bulleted-list"><li style="list-style-type:disc">Set up the callback functions using GLFW to tie user input to the backend logic</li></ul><ul id="e59fb807-7bab-41f5-b2f0-909f3d8eaa13" class="bulleted-list"><li style="list-style-type:disc">Prototyped the UI to allow users to toggle between different types</li></ul><ul id="ca01510a-376c-4fdb-88e0-c5f39e0e74ac" class="bulleted-list"><li style="list-style-type:disc">Implemented behavior of Cell types like Fire, Smoke, Bees, Grass, Stone </li></ul><ul id="820cde22-7358-434f-b996-e530f5aa9415" class="bulleted-list"><li style="list-style-type:disc">Fixed various bugs as they popped up and tuned parameters for cells that relied on RNG to produce aesthetically pleasing results</li></ul><ul id="1ab05a0b-68a6-438b-a2b6-fc9264f3e6c5" class="bulleted-list"><li style="list-style-type:disc">Worked with Manh to implement the Cell infrastructure</li></ul><h3 id="4384e408-5f54-4209-b304-3aa1d5347bbc" class="">Manh Khang Nguyen</h3><ul id="849806be-602c-45a8-b26f-d15df011be7e" class="bulleted-list"><li style="list-style-type:disc">Implemented Cell movement logic for Solid, Liquid, and Gas</li></ul><ul id="fb116b0c-b705-4f2d-98b8-974361d3bba8" class="bulleted-list"><li style="list-style-type:disc">Added Cell interactions (i.e., sand + water = wet sand)</li></ul><ul id="65baac1c-917b-44a0-9319-9c46802165b1" class="bulleted-list"><li style="list-style-type:disc">Tuned Cell behaviors: water randomness, smoke lifetime, different moving speeds</li></ul><ul id="95c934f4-aabc-4189-b600-136ef97347f7" class="bulleted-list"><li style="list-style-type:disc">Gathered Cell structure and tested different features on elements</li></ul><ul id="234e2614-3cf6-4f94-86c5-cd453929d33d" class="bulleted-list"><li style="list-style-type:disc">Worked with Miguel to clean up code</li></ul><p id="018f7ca2-5e6b-4244-9fb4-9639a4470e5c" class="">
+</p></div></article></body></html>
